@@ -21,13 +21,16 @@ body {
 
 
 .container {
-  position: fixed;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+ margin-top: 10%;
+  width: 550px;
+  height: 550px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 .list {
   list-style: none;
-  /* font-size: 30px; */
+  font-size: 25px;
+  text-align: left;
 }
