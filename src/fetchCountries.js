@@ -1,3 +1,5 @@
+// функція для HTTP-запиту і повертаню проміс з масивом країн - результатом запиту.
+
 export function fetchCountries(name) {
     return fetch(
       `https://restcountries.com/v3.1/name/${name}?fields=name,capital,population,flags,languages`

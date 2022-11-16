@@ -26,3 +26,8 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.list {
+  list-style: none;
+  /* font-size: 30px; */
+}

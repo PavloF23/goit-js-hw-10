@@ -22,19 +22,20 @@
 //  Додай повідомлення "Oops, there is no country with that name" у разі помилки, використовуючи бібліотеку notiflix.
 
 
-import debounce from 'lodash.debounce';
-import Notiflix from 'notiflix';
-import { fetchCountries } from './fetchCountries';
-import './css/styles.css';
+import debounce from 'lodash.debounce'; // підключення біблиотеки для імпорту пакетів lodash.debounce.
+import Notiflix from 'notiflix';         // підключення біблиотеки notiflix для повідомлення і у разі помилки
+import { fetchCountries } from './fetchCountries'; // підключеня функцію fetchCountries(), для HTTP-запитів
+import './css/styles.css';   // підключеня стилів css
 
-const DEBOUNCE_DELAY = 300;
+const DEBOUNCE_DELAY = 300;  // прийом Debounce на обробнику події і робити HTTP-запит через 300мс 
 
-const searchQuery = document.querySelector('#search-box');
-const countryList = document.querySelector('.country-list');
-const countryInfo = document.querySelector('.country-info');
+const searchQuery = document.querySelector('#search-box');     //посилання на інпут
+const countryList = document.querySelector('.country-list');   //посилання на список країн
+const countryInfo = document.querySelector('.country-info');   //посилання на список інформації про країну
 
-searchQuery.addEventListener('input', debounce(onInputChange, DEBOUNCE_DELAY));
+searchQuery.addEventListener('input', debounce(onInputChange, DEBOUNCE_DELAY)); //слухач інпута
 
+//фунція  для обробки даних в інпуті
 function onInputChange(e) {
   const countryName = e.target.value.trim();
 
@@ -44,6 +45,7 @@ function onInputChange(e) {
     return;
   }
 
+  // проміс
   fetchCountries(countryName)
     .then(json => {
       console.log(json);
@@ -71,23 +73,25 @@ function onInputChange(e) {
     });
 }
 
+// фунція для відображення списку країн
 function renderCountryList(countries) {
   const markup = countries
     .map(
       country =>
-        `<li><img src="${country.flags.svg}" alt="A flag" width="40px"><span>${country.name.common}</span></li>`
+        `<li class="list"><img src="${country.flags.svg}" alt="A flag" width="40px"> <span>   ${country.name.common}</span></li>`
     )
     .join('');
   countryList.innerHTML = markup;
 }
 
+// фунція для відображення інформації про країн
 function renderCountryInfo(countries) {
   const markup = countries
     .map(
       country =>
         `<img src="${
           country.flags.svg
-        }" alt="A flag" width="40px"></img><span>${country.name.common}</span>
+        }" alt="A flag" width="40px"></img><span>  ${country.name.common}</span>
       <p><b>Capital:</b> ${country.capital}</p>
       <p><b>Popuation:</b> ${country.population}</p>
       <p><b>Languages:</b> ${Object.values(country.languages)}</p>`
@@ -97,6 +101,7 @@ function renderCountryInfo(countries) {
   countryInfo.innerHTML = markup;
 }
 
+// фунція для очищення 
 function clearMarkup(domObject) {
   domObject.innerHTML = '';
 }
